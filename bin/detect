@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [ -d "$1/rel" ];
+then
+  echo "Elixir Mix Release"
+  exit 0
+else
+  exit 1
+fi

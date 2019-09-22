@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+build_path=$(cd $1 && pwd)
+
+cd $build_path
+# output the app name so the bin/release script can read it
+app_name=$(mix run --no-start -e 'IO.write(Mix.Project.config[:app])')
+echo -n $app_name > _build/elixir-mix-release-buildpack-app-name
+
+echo "-----> Building release for $app_name"
+mix release --overwrite
+

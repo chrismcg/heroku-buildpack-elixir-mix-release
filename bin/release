@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+build_path=$(cd $1 && pwd)
+app_name=$(cat $build_path/_build/elixir-mix-release-buildpack-app-name)
+
+cat <<EOF
+---
+addons:
+  []
+default_process_types:
+  web: _build/prod/rel/${app_name}/bin/${app_name} start
+EOF
