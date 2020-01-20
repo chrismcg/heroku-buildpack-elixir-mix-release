@@ -1,8 +1,22 @@
 #!/usr/bin/env bash
 
+echo "Elixir Mix Release script compile running"
+
+# Ensure dirs are present
+mkdir -p $1 $2 $3
+
 build_path=$(cd $1 && pwd)
+cache_path=$(cd $2 && pwd)
+env_path=$(cd $3 && pwd)
+
+build_pack_path=$(cd $(dirname $(dirname $0)); pwd)
+
+source ${build_pack_path}/lib/misc_funcs.sh
 
 cd $build_path
+
+export_env_vars
+
 # output the app name so the bin/release script can read it
 app_name=$(mix run --no-start -e 'IO.write(Mix.Project.config[:app])')
 echo -n $app_name > _build/elixir-mix-release-buildpack-app-name
